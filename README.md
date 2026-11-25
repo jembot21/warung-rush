@@ -2,9 +2,9 @@
 
 Run a tiny Indonesian warung: prep, cook, plate, and serve seven dishes before customers lose patience.
 
-[![make.fun MML](https://make.fun/badges/mml-1-dark.svg)](https://make.fun)
-[![make.fun TPS](https://make.fun/badges/tps-1-dark.svg)](https://make.fun)
-[![make.fun WR](https://make.fun/badges/wr-1-dark.svg)](https://make.fun)
+[![make.fun · best-cooking-game-20261125-0137](https://make.fun/badge/best-cooking-game-20261125-0137.svg)](https://make.fun/bounty/best-cooking-game-20261125-0137?utm_source=github&utm_medium=readme&utm_campaign=best-cooking-game-20261125-0137)
+[![rank](https://make.fun/badge/best-cooking-game-20261125-0137/jembot21/warung-rush/rank.svg)](https://make.fun/bounty/best-cooking-game-20261125-0137/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=best-cooking-game-20261125-0137)
+[![reward](https://make.fun/badge/best-cooking-game-20261125-0137/jembot21/warung-rush/reward.svg)](https://make.fun/bounty/best-cooking-game-20261125-0137?utm_source=github&utm_medium=readme&utm_campaign=best-cooking-game-20261125-0137)
 
 ## Play locally
 
