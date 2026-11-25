@@ -1,5 +1,6 @@
 import { ingredients, stations, dishes, finalComponentNames } from './recipes.js';
 import * as audio from './audio.js';
+import * as fx from './fx.js';
 
 export function createKitchen(state, { orders, onServe, onToast = () => {} }) {
   const crateContainer = document.getElementById('ingredient-crates');
@@ -131,6 +132,7 @@ export function createKitchen(state, { orders, onServe, onToast = () => {} }) {
   }
 
   function renderPlate(plate, rebuildLayers = false) {
+    const wasComplete = Boolean(plate.matchedDish);
     const names = componentSet(plate);
     plate.matchedDish = unlockedDishes.find(dish => {
       const finalNames = finalComponentNames(dish);
@@ -140,6 +142,7 @@ export function createKitchen(state, { orders, onServe, onToast = () => {} }) {
     plate.name.textContent = plate.matchedDish ? plate.matchedDish.name
       : plate.items.length ? 'Racikanmu' : 'Belum diracik';
     plate.element.classList.toggle('is-ready', Boolean(plate.ticket));
+    plate.element.classList.toggle('is-complete', Boolean(plate.matchedDish));
     plate.status.textContent = plate.ticket ? 'SIAP SAJI'
       : plate.matchedDish ? 'TUNGGU TIKET' : plate.items.length ? 'DIRACIK' : 'KOSONG';
     plate.serveButton.disabled = !plate.ticket;
@@ -157,6 +160,10 @@ export function createKitchen(state, { orders, onServe, onToast = () => {} }) {
       layer.setAttribute('aria-label', item.name);
       plate.layers.append(layer);
     });
+    if (!wasComplete && plate.matchedDish) {
+      fx.plateReady(plate.element);
+      audio.ready();
+    }
   }
 
   function takeIngredient(id) {
@@ -259,7 +266,8 @@ export function createKitchen(state, { orders, onServe, onToast = () => {} }) {
       renderPlate(plate);
       return false;
     }
-    onServe(ticket);
+    const payout = onServe(ticket);
+    fx.plateServed(plate.element, ticket.dish, payout);
     plate.items = [];
     renderPlate(plate, true);
     refreshPlates();
@@ -308,6 +316,7 @@ export function createKitchen(state, { orders, onServe, onToast = () => {} }) {
         }
       }
       renderStation(counter, changed);
+      if (changed) fx.stationFinished(counter.element);
     }
     refreshPlates();
   }

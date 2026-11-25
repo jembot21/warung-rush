@@ -1,4 +1,5 @@
 import { dishes, stations, finalComponentNames, platePicture } from './recipes.js';
+import * as audio from './audio.js';
 
 const rupiah = value => `Rp ${Math.round(value).toLocaleString('id-ID')}`;
 
@@ -85,6 +86,7 @@ export function createOrders(state, { onExpire = () => {}, random = Math.random 
     };
     tickets.push(ticket);
     slots.append(element);
+    audio.orderArrival();
     updatePatience(ticket);
     updateCount();
     return ticket;

@@ -1,7 +1,8 @@
-import { ingredients } from './recipes.js';
+import { ingredients, dishes } from './recipes.js';
 import * as audio from './audio.js';
 import { createOrders } from './orders.js';
 import { createKitchen } from './kitchen.js';
+import * as fx from './fx.js';
 
 const DAY_SECONDS = 100;
 const COMBO_SECONDS = 12;
@@ -29,6 +30,26 @@ const comboHint = ui['combo-count'].closest('.combo-readout').querySelector('.co
 let selectedUpgrade = null;
 let lastTime = performance.now();
 let focusBeforePause = null;
+
+function renderPriceList() {
+  const list = document.getElementById('price-list');
+  list.replaceChildren(...dishes.map(dish => {
+    const row = document.createElement('div');
+    row.className = 'price-row';
+    row.dataset.dish = dish.id;
+    const name = document.createElement('dt');
+    name.textContent = dish.name;
+    if (dish.unlockDay > state.day) {
+      const unlock = document.createElement('small');
+      unlock.textContent = `Hari ${dish.unlockDay}`;
+      name.append(unlock);
+    }
+    const price = document.createElement('dd');
+    price.textContent = rupiah(dish.price * (1.25 ** state.upgrades.earnings));
+    row.append(name, price);
+    return row;
+  }));
+}
 
 function toast(message, kind = 'reward') {
   const element = ui['toast-template'].content.firstElementChild.cloneNode(true);
@@ -68,12 +89,14 @@ function served(ticket) {
   state.dayEarnings += payout;
   state.score += Math.round(100 * state.multiplier + patience * 50);
   state.served++;
-  audio.serve();
+  audio.serve(tip / Math.max(1, price * 0.25));
+  fx.comboIncrement(ui['combo-count'].closest('.combo-readout'));
   toast(`+${rupiah(payout)} · tip ${rupiah(tip)}`);
   if (state.combo % 3 === 0) {
     toast(`Mantap! ${state.combo} sajian · combo ×${state.multiplier.toLocaleString('id-ID')}`);
   }
   renderHeader();
+  return payout;
 }
 
 const orders = createOrders(state, { onExpire: ticketExpired });
@@ -98,6 +121,7 @@ function renderHeader() {
   ui['combo-fill'].style.width = `${comboPercent}%`;
   ui['combo-meter'].setAttribute('aria-valuenow', comboPercent);
   ui['combo-count'].closest('.combo-readout').classList.toggle('is-active', state.combo > 0);
+  ui['combo-count'].closest('.combo-readout').style.setProperty('--combo-heat', (state.multiplier - 1) * 45);
   comboHint.textContent = state.combo ? `${state.combo} sajian · ${Math.ceil(state.comboRemaining)} dtk` : 'Saji berturut-turut!';
   ui['pause-button'].disabled = state.mode !== 'playing';
 }
@@ -148,6 +172,7 @@ function startDay() {
   lastTime = performance.now();
   renderHeader();
   toast(`Hari ${state.day} · target ${rupiah(state.target)}. Ayo masak!`);
+  renderPriceList();
 }
 
 function finishDay() {
@@ -169,6 +194,7 @@ function finishDay() {
     `2 bintang: capai target. 3 bintang: capai ${rupiah(state.target * 1.5)}. Pilih satu peningkatan gratis untuk besok.`;
   updateUpgradeCards();
   showPanel('day-complete-panel', ui['upgrade-speed']);
+  fx.countEarnings(ui['day-earnings'], state.dayEarnings, rupiah);
   renderHeader();
 }
 
@@ -304,6 +330,7 @@ function frame(now) {
   requestAnimationFrame(frame);
 }
 
+renderPriceList();
 renderHeader();
 showPanel('start-panel', ui['start-button']);
 requestAnimationFrame(frame);

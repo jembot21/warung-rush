@@ -62,8 +62,21 @@ export function ding() {
   tone(1047, 0.35, 'sine', 0.15);
   tone(1568, 0.22, 'sine', 0.065, 0.04);
 }
-export function serve() {
-  [784, 1047, 1319].forEach((frequency, index) => tone(frequency, 0.22, 'sine', 0.14, index * 0.07));
+export function orderArrival() {
+  tone(260, 0.045, 'triangle', 0.035, 0, 140);
+  tone(880, 0.19, 'sine', 0.065, 0.025, 1047);
+}
+export function ready() {
+  tone(784, 0.13, 'sine', 0.065);
+  tone(1047, 0.16, 'sine', 0.045, 0.065);
+}
+export function serve(tipSize = 0) {
+  const generosity = Math.max(0, Math.min(1, tipSize));
+  const notes = [659, 784, 988, 1175, 1568].slice(0, 3 + Math.round(generosity * 2));
+  notes.forEach((frequency, index) => {
+    tone(frequency, 0.14 + index * 0.025, 'sine',
+      (0.09 + generosity * 0.035) * (0.7 + index * 0.15), index * 0.06);
+  });
 }
 export function expire() {
   tone(95, 0.3, 'sawtooth', 0.075, 0, 55);

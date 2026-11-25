@@ -60,6 +60,17 @@ export const dishes = [
     ],
   },
   {
+    id: 'nasi-ayam-geprek', name: 'Nasi Ayam Geprek', price: 21000, unlockDay: 2,
+    description: 'Nasi langsung ke piring. Potong ayam lalu goreng, tambah cabai potong.',
+    art: { mounds: ['#fff0c5', '#d49a53', '#c85535'], garnish: '#74964f' },
+    components: [
+      { name: 'Nasi putih', from: 'rice', station: null },
+      { name: 'Ayam potong', from: 'chicken', station: 'cut' },
+      { name: 'Ayam goreng', from: 'Ayam potong', station: 'wok' },
+      { name: 'Sambal iris', from: 'chili', station: 'cut' },
+    ],
+  },
+  {
     id: 'gado-gado', name: 'Gado-Gado', price: 22000, unlockDay: 2,
     description: 'Rebus kol dan telur. Potong tahu dan cabai.',
     art: { mounds: ['#82a15e', '#f0d79a', '#fff8e7'], garnish: '#c85535' },
