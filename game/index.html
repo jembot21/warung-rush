@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#b74632">
+  <meta name="description" content="Warung kecil, rasa besar. Masak dan sajikan jajanan Indonesia di Warung Rush.">
+  <title>Warung Rush — Masak cepat, rasa hebat!</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./js/game.js"></script>
+</head>
+<body>
+  <!-- All icons and food illustrations live here; <use> references stay in this page. -->
+  <svg class="svg-library" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="icon-chili" viewBox="0 0 32 32">
+        <path d="M21 10c-2-4-1-7 3-8" fill="none" stroke="#446541" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M20 8c-2 2-3 2-5 3l7 5 4-5z" fill="#53794b"/>
+        <path d="M16 10c-7 3-4 10-13 16 11 2 21-3 23-11 1-4-6-7-10-5z" fill="#da5038" stroke="#823423" stroke-width="1.7"/>
+        <path d="M16 14c-2 2-2 4-4 7" fill="none" stroke="#ffb284" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="icon-coin" viewBox="0 0 32 32">
+        <ellipse cx="16" cy="19" rx="12" ry="10" fill="#bf842d" stroke="#805127" stroke-width="2"/>
+        <circle cx="16" cy="14" r="12" fill="#edbd49" stroke="#805127" stroke-width="2"/>
+        <circle cx="16" cy="14" r="8" fill="none" stroke="#9d6524" stroke-width="1.5"/>
+        <path d="M13 20V9h4c4 0 4 6 0 6h-4m4 0 3 5" fill="none" stroke="#72471f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="icon-pause" viewBox="0 0 24 24">
+        <rect x="5" y="4" width="5" height="16" rx="1.5" fill="currentColor"/>
+        <rect x="14" y="4" width="5" height="16" rx="1.5" fill="currentColor"/>
+      </symbol>
+      <symbol id="icon-sound" viewBox="0 0 24 24">
+        <path d="M3 9h4l5-4v14l-5-4H3z" fill="currentColor"/>
+        <path d="M16 8c3 2 3 6 0 8m3-11c5 4 5 10 0 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="icon-ticket" viewBox="0 0 32 32">
+        <path d="M7 4h18v25l-3-2-3 2-3-2-3 2-3-2-3 2z" fill="#fff7e7" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M12 10h8m-8 5h8m-8 5h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="icon-crate" viewBox="0 0 32 32">
+        <path d="M5 9h22v19H5z" fill="#d4a16a" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M4 15h24M4 23h24M10 9v19M22 9v19" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M13 9c-5-6-1-9 3-4 2-6 7-5 5 1l-2 3" fill="#668653" stroke="currentColor" stroke-width="1.5"/>
+      </symbol>
+      <symbol id="icon-kitchen" viewBox="0 0 32 32">
+        <path d="M5 15c0 13 20 13 20 0z" fill="#e6b852" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M25 16h5M6 29h18M11 5c-3 3 3 4 0 7m6-9c-3 3 3 4 0 7m6-5c-3 3 3 4 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="icon-plate" viewBox="0 0 32 32">
+        <ellipse cx="16" cy="22" rx="14" ry="7" fill="#fff7e7" stroke="currentColor" stroke-width="2"/>
+        <path d="M7 20c0-14 18-14 18 0z" fill="#e6b852" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 8c-2-3 2-3 0-6m8 6c-2-3 2-3 0-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="icon-tray" viewBox="0 0 36 32">
+        <path d="M3 16h30l-4 10H7z" fill="#edbd49" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M9 15c0-13 18-13 18 0M18 5V2m-7 28h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="icon-trash" viewBox="0 0 24 24">
+        <path d="M6 7l1 13h10l1-13M4 7h16M9 7V4h6v3m-5 4v5m4-5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="icon-arrow" viewBox="0 0 24 24">
+        <path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="icon-star" viewBox="0 0 32 32">
+        <path d="m16 3 4 8 9 1-6.5 6.5L24 28l-8-4.5L8 28l1.5-9.5L3 12l9-1z" fill="currentColor" stroke="#855c2d" stroke-width="1.8" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="icon-flame" viewBox="0 0 32 32">
+        <path d="M18 2c3 10-8 10-4 16 3-1 6-5 7-8 10 10 8 20-5 20C3 30 1 17 9 10c-1 7 3 7 3 7-1-8 7-9 6-15z" fill="#d85a35" stroke="#7c3929" stroke-width="1.5"/>
+        <path d="M17 16c5 5 6 11-1 11-6 0-5-6-2-9 0 4 3 3 3-2z" fill="#f2c654"/>
+      </symbol>
+      <symbol id="icon-clock" viewBox="0 0 32 32">
+        <circle cx="16" cy="17" r="12" fill="#fff7e7" stroke="currentColor" stroke-width="2"/>
+        <path d="M16 10v7l5 3M12 2h8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="ingredient-rice" viewBox="0 0 72 64">
+        <path d="M13 34c0-30 46-30 46 0" fill="#fff7dc" stroke="#936940" stroke-width="2"/>
+        <path d="M8 34c2 27 54 27 56 0z" fill="#d46545" stroke="#75452f" stroke-width="2"/>
+        <ellipse cx="36" cy="34" rx="28" ry="8" fill="#fff5d4" stroke="#936940" stroke-width="2"/>
+        <path d="m23 23 4-2m8-5 4 1m8 7 4 2m-19 3 4 1m-13 5 4 1m19 0 4-1" stroke="#d5b987" stroke-width="3" stroke-linecap="round"/>
+        <path d="M21 45c9 5 22 5 30 0" fill="none" stroke="#f09b6e" stroke-width="3" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="ingredient-noodles" viewBox="0 0 72 64">
+        <ellipse cx="36" cy="45" rx="30" ry="11" fill="#fff7e7" stroke="#8e6c4a" stroke-width="2"/>
+        <path d="M14 39c-12-15 20-20 14-4s23 12 22-1-31-21-25-6 31-4 29 9-21 16-30 4 17-26 17-10-32 2-27 8 34 12 43-2" fill="none" stroke="#a47426" stroke-width="7" stroke-linecap="round"/>
+        <path d="M14 38c-12-15 20-20 14-4s23 12 22-1-31-21-25-6 31-4 29 9-21 16-30 4 17-26 17-10-32 2-27 8 34 12 43-2" fill="none" stroke="#edc25d" stroke-width="4" stroke-linecap="round"/>
+        <path d="m44 12 18-8m-16 13 18-7" stroke="#8c5737" stroke-width="3" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="ingredient-chicken" viewBox="0 0 72 64">
+        <path d="m48 33 10 10c8-4 13 7 6 10-4 7-14 1-10-5L43 39" fill="#fff5d8" stroke="#8e6744" stroke-width="2"/>
+        <path d="M47 18c17 13 5 30-10 27-4 1-11 3-19-4C-1 22 22 1 40 15z" fill="#d49255" stroke="#87502e" stroke-width="2"/>
+        <path d="M16 24c3-7 10-10 17-7" fill="none" stroke="#f4c584" stroke-width="4" stroke-linecap="round"/>
+        <path d="m31 29 8 8m-13-3 6 7" stroke="#a66b39" stroke-width="2.5" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="ingredient-egg" viewBox="0 0 72 64">
+        <path d="M43 5c14 0 24 31 17 42-8 13-29 11-36-2C18 32 31 5 43 5z" fill="#dfb589" stroke="#906446" stroke-width="2"/>
+        <path d="M26 21C14 18 5 33 9 44c-4 12 26 18 34 5 16-3 10-28-4-26-5-5-9-5-13-2z" fill="#fff8e6" stroke="#b79b74" stroke-width="2"/>
+        <circle cx="29" cy="38" r="11" fill="#efbc39" stroke="#b98429" stroke-width="1.5"/>
+        <path d="M24 33c2-2 5-2 7-1" fill="none" stroke="#ffe594" stroke-width="3" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="ingredient-tofu" viewBox="0 0 72 64">
+        <path d="m8 29 31-12 26 10v24L34 60 8 48z" fill="#e5ca83" stroke="#997641" stroke-width="2" stroke-linejoin="round"/>
+        <path d="m8 29 26 11 31-13M34 40v20" fill="#fff1bc" stroke="#997641" stroke-width="2" stroke-linejoin="round"/>
+        <path d="m15 17 21-9 21 8-20 10z" fill="#fff1bc" stroke="#997641" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M15 17v12l19 8 3-11m20-10v15" fill="#f0d79a" stroke="#997641" stroke-width="2" stroke-linejoin="round"/>
+        <path d="m17 36 4 2m-5 6 3 1m24 0 4-1m6-9 4-1m-29-15 4 1" stroke="#bb9a60" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="ingredient-tempeh" viewBox="0 0 72 64">
+        <path d="m9 23 35-9 21 12v22L30 59 9 45z" fill="#b88149" stroke="#805432" stroke-width="2" stroke-linejoin="round"/>
+        <path d="m9 23 21 15 35-12-21-12z" fill="#efd5a1" stroke="#805432" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M30 38v21" stroke="#805432" stroke-width="2"/>
+        <g fill="#d4ac72" stroke="#9f7746" stroke-width="1">
+          <ellipse cx="26" cy="25" rx="4" ry="2.5"/><ellipse cx="36" cy="22" rx="4" ry="2.5"/>
+          <ellipse cx="46" cy="26" rx="4" ry="2.5"/><ellipse cx="34" cy="31" rx="4" ry="2.5"/>
+          <ellipse cx="42" cy="44" rx="3" ry="4"/><ellipse cx="54" cy="39" rx="3" ry="4"/>
+        </g>
+      </symbol>
+      <symbol id="ingredient-cabbage" viewBox="0 0 72 64">
+        <path d="M17 53C-1 46 9 29 15 26 9 10 31 4 37 14c16-17 36 4 26 17 14 11-2 31-19 26z" fill="#6d9257" stroke="#41623d" stroke-width="2"/>
+        <path d="M37 16c-14-9-29 17-18 31 8 17 38 7 34-13-2-11-5-14-16-18z" fill="#a5bb72" stroke="#527446" stroke-width="2"/>
+        <path d="M32 23c15-7 19 14 6 25m-7-17c-8 12 13 13 7 17m-19-9 7 7m26-7-8 7" fill="none" stroke="#d9dd9b" stroke-width="3" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="ingredient-chili" viewBox="0 0 72 64">
+        <path d="M48 14c-3-7 1-11 8-12m-19 19c-5-6-3-10 2-13" fill="none" stroke="#486c42" stroke-width="4" stroke-linecap="round"/>
+        <path d="M43 13C27 17 34 37 8 50c24 6 51-10 51-29 0-8-11-11-16-8z" fill="#d45436" stroke="#903b2a" stroke-width="2"/>
+        <path d="M29 24c-9 9-5 22-22 30 21 2 35-11 35-23 0-8-8-10-13-7z" fill="#b9422e" stroke="#903b2a" stroke-width="2"/>
+        <path d="M44 20c-4 5-2 12-7 17m-7-7c-4 4-3 9-7 12" fill="none" stroke="#f7a779" stroke-width="3" stroke-linecap="round"/>
+        <path d="m41 14 7-2 8 7-9 1m-18 4 7-4 6 7-9 1" fill="#5e834b"/>
+      </symbol>
+      <symbol id="dish-rice" viewBox="0 0 120 80">
+        <ellipse cx="60" cy="59" rx="54" ry="17" fill="#d1c0a1"/>
+        <ellipse cx="60" cy="54" rx="54" ry="17" fill="#fff8e6" stroke="#9b8364" stroke-width="2"/>
+        <ellipse cx="60" cy="52" rx="43" ry="11" fill="#ead9b8" stroke="#bea582" stroke-width="1.5"/>
+        <path d="M28 48c0-43 62-43 62 0z" fill="#ce9851" stroke="#9a6734" stroke-width="2"/>
+        <path d="m41 29 4 2m11-9 4 2m11 5 3 2m-21 7 4 1m18 1 4 2m-33 0 3 2" stroke="#f4c77f" stroke-width="3" stroke-linecap="round"/>
+        <path d="M50 28c-8-9 8-19 17-12 13-5 23 11 15 16-5 12-33 7-32-4z" fill="#fff8e6" stroke="#ae925e" stroke-width="1.5"/>
+        <ellipse cx="67" cy="24" rx="8" ry="6" fill="#f0bb37"/>
+        <path d="M17 49c-1-10 12-12 18-6-6 13-14 12-18 6m71 3c-4-11 9-16 15-9-2 10-6 13-15 9" fill="#74964f" stroke="#4e703e" stroke-width="1.5"/>
+        <path d="m34 54 9-3 3 5-9 3" fill="#c44e32"/>
+      </symbol>
+      <symbol id="art-cutting-board" viewBox="0 0 160 136">
+        <ellipse cx="78" cy="114" rx="64" ry="9" fill="#6c442d" opacity=".15"/>
+        <rect x="8" y="58" width="27" height="34" rx="10" fill="#bd854f" stroke="#855431" stroke-width="3"/>
+        <circle cx="19" cy="75" r="4" fill="#f2ddbb" stroke="#855431" stroke-width="2"/>
+        <rect x="28" y="39" width="112" height="70" rx="12" fill="#d4a269" stroke="#855431" stroke-width="3"/>
+        <rect x="35" y="46" width="98" height="55" rx="7" fill="none" stroke="#b17c49" stroke-width="2"/>
+        <path d="M46 58h45m-43 9h29m-32 22h46m17-22h12m-25 18h20" stroke="#b88754" stroke-width="2" stroke-linecap="round"/>
+        <path d="m60 26 49 20-9 23C80 58 71 43 60 26z" fill="#eee9d7" stroke="#78624d" stroke-width="2"/>
+        <path d="m109 46 23 10c7 3 2 15-4 12l-28-12z" fill="#9c4934" stroke="#653d2b" stroke-width="2"/>
+        <circle cx="117" cy="56" r="2" fill="#edc689"/><circle cx="126" cy="60" r="2" fill="#edc689"/>
+      </symbol>
+      <symbol id="art-wok" viewBox="0 0 160 136">
+        <ellipse cx="74" cy="119" rx="57" ry="8" fill="#6c442d" opacity=".15"/>
+        <path d="M39 100h69l7 16H32z" fill="#b94e36" stroke="#773e2b" stroke-width="3"/>
+        <ellipse cx="73" cy="100" rx="37" ry="9" fill="#664936" stroke="#473427" stroke-width="3"/>
+        <path d="M19 66c3 56 105 56 108 0z" fill="#4f4135" stroke="#372e26" stroke-width="3"/>
+        <path d="m124 68 24-12 6 9-27 12" fill="#976748" stroke="#473427" stroke-width="3" stroke-linejoin="round"/>
+        <ellipse cx="73" cy="66" rx="54" ry="21" fill="#8a7960" stroke="#372e26" stroke-width="3"/>
+        <ellipse cx="73" cy="66" rx="43" ry="14" fill="#615442"/>
+        <path d="M36 62c13-10 44-11 58-5" fill="none" stroke="#b3a088" stroke-width="3" stroke-linecap="round"/>
+        <path d="M29 85c8 9 23 14 36 15" fill="none" stroke="#776550" stroke-width="3" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="art-grill" viewBox="0 0 160 136">
+        <ellipse cx="80" cy="123" rx="57" ry="7" fill="#6c442d" opacity=".15"/>
+        <path d="m34 96-6 25m98-25 6 25" stroke="#594533" stroke-width="6" stroke-linecap="round"/>
+        <path d="M22 60v35c0 27 116 27 116 0V60z" fill="#b6533a" stroke="#703d2b" stroke-width="3"/>
+        <ellipse cx="80" cy="60" rx="58" ry="22" fill="#594b3b" stroke="#443529" stroke-width="3"/>
+        <ellipse cx="80" cy="60" rx="49" ry="15" fill="#3f352c" stroke="#b99c77" stroke-width="2"/>
+        <path d="m40 50 1 20m15-25v30m16-31v32m16-32v32m16-30v29m16-25v20M34 55h92M33 64h95" fill="none" stroke="#96836b" stroke-width="2"/>
+        <path d="M10 66h12m116 0h12" stroke="#594533" stroke-width="6" stroke-linecap="round"/>
+        <path d="M61 104h38" stroke="#f0b55e" stroke-width="3" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="art-pot" viewBox="0 0 160 136">
+        <ellipse cx="80" cy="121" rx="56" ry="8" fill="#6c442d" opacity=".15"/>
+        <path d="M42 110h76l6 9H35z" fill="#5d4b38" stroke="#443628" stroke-width="2"/>
+        <path d="M30 58H15v20h18m94-20h17v20h-18" fill="none" stroke="#69543f" stroke-width="6" stroke-linejoin="round"/>
+        <path d="M31 52v46c0 27 98 27 98 0V52" fill="#d7b679" stroke="#7b603d" stroke-width="3"/>
+        <path d="M41 64v29c0 6 3 9 8 11" fill="none" stroke="#f2dbaa" stroke-width="5" stroke-linecap="round"/>
+        <path d="M32 53c2-37 95-37 97 0" fill="#e3c797" stroke="#7b603d" stroke-width="3"/>
+        <ellipse cx="80" cy="53" rx="51" ry="10" fill="#e8ce9c" stroke="#7b603d" stroke-width="3"/>
+        <path d="M70 26v-7h20v7" fill="none" stroke="#69543f" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M48 43c9-10 36-15 51-7" fill="none" stroke="#fff0c9" stroke-width="4" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="art-warung" viewBox="0 0 360 170">
+        <ellipse cx="180" cy="158" rx="151" ry="10" fill="#6c442d" opacity=".12"/>
+        <path d="M45 38h270v108H45z" fill="#e8c491" stroke="#70462e" stroke-width="4"/>
+        <path d="M55 52h250v73H55z" fill="#456449"/>
+        <path d="M37 29h286l-13-18H50z" fill="#d3583c" stroke="#70462e" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M37 29v15q12 15 24 0 12 15 24 0 12 15 24 0 12 15 24 0 12 15 24 0 12 15 24 0 12 15 24 0 12 15 24 0 12 15 24 0 12 15 24 0 12 15 24 0 12 15 22 0V29z" fill="#fff0c8" stroke="#70462e" stroke-width="3"/>
+        <path d="M61 30v14q12 15 24 0V30m24 0v14q12 15 24 0V30m24 0v14q12 15 24 0V30m24 0v14q12 15 24 0V30m24 0v14q12 15 24 0V30" fill="#d3583c"/>
+        <path d="M34 121h292v30H34z" fill="#b87e4b" stroke="#70462e" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M43 133h274m-212-9v22m83-22v22m72-22v22" stroke="#936037" stroke-width="2"/>
+        <path d="M69 107c0 18 55 18 55 0z" fill="#e8c491" stroke="#e8c491" stroke-width="2"/>
+        <ellipse cx="96" cy="107" rx="29" ry="7" fill="#f8eac5"/>
+        <path d="M145 91h52v19c0 15-52 15-52 0z" fill="#dab77d" stroke="#f8eac5" stroke-width="2"/>
+        <path d="M142 90c8-20 50-20 58 0z" fill="#f8eac5"/>
+        <path d="M239 106c0-32 43-32 43 0" fill="#ebbb54"/>
+        <ellipse cx="261" cy="109" rx="33" ry="9" fill="#f8eac5"/>
+        <path d="M84 83c-7-8 8-8 1-17m13 17c-7-8 8-8 1-17m65 4c-7-8 8-8 1-17m91 15c-7-8 8-8 1-17" fill="none" stroke="#f8eac5" stroke-width="3" stroke-linecap="round"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <div id="game-shell" class="game-shell">
+    <header id="game-header" class="stall-header" aria-label="Status warung">
+      <div class="stall-brand">
+        <svg class="brand-chili" aria-hidden="true"><use href="#icon-chili"></use></svg>
+        <div>
+          <h1 class="game-title">WARUNG <span>RUSH</span></h1>
+          <p class="stall-motto">MASAK CEPAT · RASA HEBAT!</p>
+        </div>
+      </div>
+      <div class="day-badge">
+        <span class="hud-label">DAY</span>
+        <output id="day-number" class="day-number" aria-label="Hari">1</output>
+      </div>
+      <div class="day-clock">
+        <div class="meter-caption">
+          <span class="hud-label">WAKTU BUKA</span>
+          <output id="day-time-remaining" class="time-remaining" aria-label="Sisa waktu">01:30</output>
+        </div>
+        <div id="day-timer" class="meter-track day-timer" role="progressbar" aria-label="Waktu hari tersisa" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
+          <span id="day-timer-fill" class="meter-fill day-timer-fill"></span>
+        </div>
+        <span id="day-timer-status" class="timer-status">Warung siap buka</span>
+      </div>
+      <div class="earnings-readout">
+        <svg class="coin-icon" aria-hidden="true"><use href="#icon-coin"></use></svg>
+        <div>
+          <span class="hud-label">PENDAPATAN</span>
+          <output id="coins" class="coins" aria-label="Koin">Rp 0</output>
+          <span class="score-caption">SKOR <output id="score" aria-label="Skor">0</output></span>
+        </div>
+      </div>
+      <div class="combo-readout">
+        <div class="meter-caption">
+          <span class="hud-label">COMBO</span>
+          <output id="combo-count" class="combo-count" aria-label="Pengali combo">×1</output>
+        </div>
+        <div id="combo-meter" class="meter-track combo-meter" role="progressbar" aria-label="Combo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <span id="combo-fill" class="meter-fill combo-fill"></span>
+        </div>
+        <span class="combo-hint">Saji berturut-turut!</span>
+      </div>
+      <div class="header-controls">
+        <button id="pause-button" class="icon-button" type="button" data-action="pause" aria-label="Jeda permainan" title="Jeda (Esc)">
+          <svg aria-hidden="true"><use href="#icon-pause"></use></svg>
+        </button>
+        <button id="sound-button" class="icon-button sound-button" type="button" data-action="toggle-sound" aria-label="Matikan suara" aria-pressed="false" title="Suara">
+          <svg aria-hidden="true">
+            <use href="#icon-sound"></use>
+            <path class="sound-muted-mark" d="M3 3 21 21" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="kitchen-view" class="kitchen-view">
+      <section id="order-board" class="order-board" aria-labelledby="orders-heading">
+        <div class="section-heading orders-heading">
+          <h2 id="orders-heading"><svg aria-hidden="true"><use href="#icon-ticket"></use></svg>PESANAN</h2>
+          <p class="board-note">Perut lapar tak bisa menunggu.</p>
+          <span class="order-count"><output id="order-count" aria-label="Pesanan aktif">0</output> / 4</span>
+        </div>
+        <div class="order-board-body">
+          <div class="empty-ticket-track" aria-hidden="true"><span>01</span><span>02</span><span>03</span><span>04</span></div>
+          <!-- Append up to four clones of order-ticket-template here. -->
+          <div id="order-slots" class="order-slots" role="list" aria-label="Tiket pesanan"></div>
+          <div id="orders-empty" class="orders-empty">
+            <svg aria-hidden="true"><use href="#dish-rice"></use></svg>
+            <div><strong>Belum ada pesanan</strong><p>Pelanggan akan datang. Siapkan dapurmu!</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="kitchen-counter" class="kitchen-counter" aria-label="Meja memasak">
+        <section id="ingredients-zone" class="counter-zone ingredients-zone" aria-labelledby="ingredients-heading">
+          <div class="section-heading">
+            <h2 id="ingredients-heading"><svg aria-hidden="true"><use href="#icon-crate"></use></svg>BAHAN</h2>
+            <span class="zone-step" aria-label="Langkah 1">1</span>
+          </div>
+          <div class="ingredient-rack">
+            <!-- Script populates the eight crates from ingredient-template. -->
+            <div id="ingredient-crates" class="ingredient-grid" role="group" aria-label="Delapan peti bahan"></div>
+            <div class="ingredient-empty">
+              <svg aria-hidden="true"><use href="#icon-crate"></use></svg>
+              <strong>Rak bahan</strong>
+              <span>Segar dari pasar.</span>
+            </div>
+          </div>
+          <p class="zone-hint">Pilih bahan <span>·</span> tombol <kbd>1</kbd>–<kbd>8</kbd></p>
+        </section>
+
+        <section id="cooking-zone" class="counter-zone cooking-zone" aria-labelledby="cooking-heading">
+          <div class="section-heading">
+            <h2 id="cooking-heading"><svg aria-hidden="true"><use href="#icon-kitchen"></use></svg>DAPUR</h2>
+            <span class="zone-step" aria-label="Langkah 2">2</span>
+          </div>
+          <div id="cooking-stations" class="cooking-stations">
+            <!-- data-station identifies the action; progress fills accept style.width. -->
+            <article id="station-cut" class="station station-cut" data-station="cut" aria-labelledby="cut-title">
+              <button class="station-control" type="button" data-action="use-station" aria-label="Gunakan talenan">
+                <span id="cut-title" class="station-name">Talenan</span>
+                <span class="station-action">POTONG</span>
+                <span class="station-visual">
+                  <svg aria-hidden="true"><use href="#art-cutting-board"></use></svg>
+                  <span class="station-effects sizzle" aria-hidden="true"><i></i><i></i><i></i></span>
+                </span>
+              </button>
+              <div id="cut-slots" class="station-slots" aria-label="Bahan di talenan"></div>
+              <div id="cut-progress" class="station-progress meter-track" role="progressbar" aria-label="Kemajuan memotong" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="station-progress-fill meter-fill"></span></div>
+              <output id="cut-status" class="station-status">Siap</output>
+            </article>
+            <article id="station-wok" class="station station-wok" data-station="wok" aria-labelledby="wok-title">
+              <button class="station-control" type="button" data-action="use-station" aria-label="Gunakan wajan">
+                <span id="wok-title" class="station-name">Wajan</span>
+                <span class="station-action">TUMIS</span>
+                <span class="station-visual">
+                  <svg aria-hidden="true"><use href="#art-wok"></use></svg>
+                  <span class="station-effects steam" aria-hidden="true"><i></i><i></i><i></i></span>
+                  <span class="station-effects sizzle" aria-hidden="true"><i></i><i></i><i></i></span>
+                </span>
+              </button>
+              <div id="wok-slots" class="station-slots" aria-label="Bahan di wajan"></div>
+              <div id="wok-progress" class="station-progress meter-track" role="progressbar" aria-label="Kemajuan menumis" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="station-progress-fill meter-fill"></span></div>
+              <output id="wok-status" class="station-status">Siap</output>
+            </article>
+            <article id="station-grill" class="station station-grill" data-station="grill" aria-labelledby="grill-title">
+              <button class="station-control" type="button" data-action="use-station" aria-label="Gunakan panggangan">
+                <span id="grill-title" class="station-name">Panggangan</span>
+                <span class="station-action">BAKAR</span>
+                <span class="station-visual">
+                  <svg aria-hidden="true"><use href="#art-grill"></use></svg>
+                  <span class="station-effects steam" aria-hidden="true"><i></i><i></i><i></i></span>
+                  <span class="station-effects sizzle" aria-hidden="true"><i></i><i></i><i></i></span>
+                </span>
+              </button>
+              <div id="grill-slots" class="station-slots" aria-label="Bahan di panggangan"></div>
+              <div id="grill-progress" class="station-progress meter-track" role="progressbar" aria-label="Kemajuan memanggang" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="station-progress-fill meter-fill"></span></div>
+              <output id="grill-status" class="station-status">Siap</output>
+            </article>
+            <article id="station-pot" class="station station-pot" data-station="pot" aria-labelledby="pot-title">
+              <button class="station-control" type="button" data-action="use-station" aria-label="Gunakan panci">
+                <span id="pot-title" class="station-name">Panci</span>
+                <span class="station-action">REBUS</span>
+                <span class="station-visual">
+                  <svg aria-hidden="true"><use href="#art-pot"></use></svg>
+                  <span class="station-effects steam" aria-hidden="true"><i></i><i></i><i></i></span>
+                </span>
+              </button>
+              <div id="pot-slots" class="station-slots" aria-label="Bahan di panci"></div>
+              <div id="pot-progress" class="station-progress meter-track" role="progressbar" aria-label="Kemajuan merebus" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="station-progress-fill meter-fill"></span></div>
+              <output id="pot-status" class="station-status">Siap</output>
+            </article>
+          </div>
+          <p class="zone-hint">Letakkan bahan, tunggu matang, lalu ambil.</p>
+        </section>
+
+        <section id="serving-zone" class="counter-zone serving-zone" aria-labelledby="serving-heading">
+          <div class="section-heading">
+            <h2 id="serving-heading"><svg aria-hidden="true"><use href="#icon-plate"></use></svg>SAJI</h2>
+            <span class="zone-step" aria-label="Langkah 3">3</span>
+          </div>
+          <div id="plate-slots" class="plate-slots">
+            <article id="plate-1" class="plate-slot" data-plate="0" aria-label="Piring 1">
+              <div class="plate-heading"><span>PIRING 1</span><span class="plate-state">KOSONG</span></div>
+              <button class="plate-visual" type="button" data-action="add-to-plate" aria-label="Tambahkan bahan ke piring 1">
+                <span id="plate-1-layers" class="plate-layers"></span>
+              </button>
+              <div class="plate-footer">
+                <output id="plate-1-name" class="plate-name">Belum diracik</output>
+                <button id="serve-plate-1" class="button serve-button" type="button" data-action="serve" disabled>Saji</button>
+                <button id="trash-plate-1" class="icon-button trash-button" type="button" data-action="discard-plate" aria-label="Buang isi piring 1" title="Buang isi piring" disabled><svg aria-hidden="true"><use href="#icon-trash"></use></svg></button>
+              </div>
+            </article>
+            <article id="plate-2" class="plate-slot" data-plate="1" aria-label="Piring 2">
+              <div class="plate-heading"><span>PIRING 2</span><span class="plate-state">KOSONG</span></div>
+              <button class="plate-visual" type="button" data-action="add-to-plate" aria-label="Tambahkan bahan ke piring 2">
+                <span id="plate-2-layers" class="plate-layers"></span>
+              </button>
+              <div class="plate-footer">
+                <output id="plate-2-name" class="plate-name">Belum diracik</output>
+                <button id="serve-plate-2" class="button serve-button" type="button" data-action="serve" disabled>Saji</button>
+                <button id="trash-plate-2" class="icon-button trash-button" type="button" data-action="discard-plate" aria-label="Buang isi piring 2" title="Buang isi piring" disabled><svg aria-hidden="true"><use href="#icon-trash"></use></svg></button>
+              </div>
+            </article>
+          </div>
+          <p class="zone-hint">Susun sesuai pesanan. Saji selagi hangat!</p>
+        </section>
+      </section>
+
+      <div class="counter-bottom">
+        <aside id="hand-indicator" class="hand-tray" aria-label="Bahan yang dibawa">
+          <svg class="hand-icon" aria-hidden="true"><use href="#icon-tray"></use></svg>
+          <div class="hand-copy"><span class="hud-label">TANGANMU</span><output id="held-item-name" class="held-item-name" aria-live="polite">Kosong</output></div>
+          <div id="held-item-visual" class="held-item-visual" aria-hidden="true"></div>
+          <button id="discard-held-item" class="icon-button trash-button" type="button" data-action="discard-held-item" aria-label="Buang bahan di tangan" title="Buang bahan" disabled><svg aria-hidden="true"><use href="#icon-trash"></use></svg></button>
+        </aside>
+        <p class="counter-help"><span>Ambil bahan</span><svg aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Masak</span><svg aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Susun &amp; saji</span></p>
+        <span class="pause-hint"><kbd>Esc</kbd> jeda</span>
+      </div>
+    </main>
+    <footer class="stall-footer"><span>Dari dapur kecil, untuk perut besar.</span><span class="footer-flourish" aria-hidden="true">◆ ◆ ◆</span><span>SELAMAT MAKAN!</span></footer>
+  </div>
+
+  <!-- The next session's game script opens panels with panel.hidden = false. -->
+  <section id="start-panel" class="overlay start-overlay" role="dialog" aria-modal="true" aria-labelledby="start-title" aria-describedby="start-description" hidden>
+    <div class="overlay-panel start-panel-card">
+      <svg class="start-warung-art" aria-hidden="true"><use href="#art-warung"></use></svg>
+      <h2 id="start-title" class="panel-title">WARUNG <span>RUSH</span><svg aria-hidden="true"><use href="#icon-chili"></use></svg></h2>
+      <p id="start-description" class="panel-description">Warung kecil. Rasa besar.<br>Bikin pelanggan kenyang sebelum kesabarannya habis!</p>
+      <ol class="how-to-play">
+        <li><span class="how-to-icon"><svg aria-hidden="true"><use href="#icon-crate"></use></svg></span><div><strong>1. Ambil bahan</strong><p>Klik peti bahan atau tekan <kbd>1</kbd>–<kbd>8</kbd>.</p></div></li>
+        <li><span class="how-to-icon"><svg aria-hidden="true"><use href="#icon-kitchen"></use></svg></span><div><strong>2. Masak sampai matang</strong><p>Pilih dapur yang tepat, lalu ambil hasilnya.</p></div></li>
+        <li><span class="how-to-icon"><svg aria-hidden="true"><use href="#icon-plate"></use></svg></span><div><strong>3. Susun &amp; saji</strong><p>Racik di piring sesuai tiket, lalu tekan Saji!</p></div></li>
+      </ol>
+      <button id="start-button" class="button primary-button start-button" type="button" data-action="start">Mulai Masak<svg aria-hidden="true"><use href="#icon-arrow"></use></svg></button>
+      <p class="panel-footnote">Cepat boleh, gosong jangan.</p>
+    </div>
+  </section>
+
+  <section id="day-complete-panel" class="overlay day-complete-overlay" role="dialog" aria-modal="true" aria-labelledby="day-complete-title" hidden>
+    <div class="overlay-panel day-complete-card">
+      <span class="panel-stamp">WARUNG TUTUP</span>
+      <h2 id="day-complete-title" class="panel-title">Hari yang nikmat!</h2>
+      <div id="day-stars" class="star-row" data-rating="0" role="img" aria-label="0 dari 3 bintang"><svg class="star" aria-hidden="true"><use href="#icon-star"></use></svg><svg class="star" aria-hidden="true"><use href="#icon-star"></use></svg><svg class="star" aria-hidden="true"><use href="#icon-star"></use></svg></div>
+      <dl class="day-summary">
+        <div class="summary-earnings"><dt>Pendapatan hari ini</dt><dd><output id="day-earnings">Rp 0</output></dd></div>
+        <div><dt>Pesanan tersaji</dt><dd><output id="day-served">0</output></dd></div>
+        <div><dt>Pesanan terlewat</dt><dd><output id="day-lost">0</output></dd></div>
+      </dl>
+      <h3 id="upgrades-heading" class="upgrade-heading">Besok, warung makin jago.</h3>
+      <p class="upgrade-instruction">Pilih satu peningkatan untuk hari berikutnya.</p>
+      <div id="upgrade-cards" class="upgrade-cards" role="group" aria-labelledby="upgrades-heading">
+        <button id="upgrade-speed" class="upgrade-card" type="button" data-upgrade="speed" aria-pressed="false"><svg aria-hidden="true"><use href="#icon-flame"></use></svg><span class="upgrade-name">Api Mantap</span><span class="upgrade-description">Dapur memasak lebih cepat.</span><span class="upgrade-selection">Pilih</span></button>
+        <button id="upgrade-patience" class="upgrade-card" type="button" data-upgrade="patience" aria-pressed="false"><svg aria-hidden="true"><use href="#icon-clock"></use></svg><span class="upgrade-name">Pelanggan Santai</span><span class="upgrade-description">Pelanggan menunggu lebih lama.</span><span class="upgrade-selection">Pilih</span></button>
+        <button id="upgrade-earnings" class="upgrade-card" type="button" data-upgrade="earnings" aria-pressed="false"><svg aria-hidden="true"><use href="#icon-chili"></use></svg><span class="upgrade-name">Sambal Spesial</span><span class="upgrade-description">Setiap sajian bernilai lebih.</span><span class="upgrade-selection">Pilih</span></button>
+      </div>
+      <button id="next-day-button" class="button primary-button" type="button" data-action="next-day">Buka Hari Berikutnya<svg aria-hidden="true"><use href="#icon-arrow"></use></svg></button>
+    </div>
+  </section>
+
+  <section id="pause-panel" class="overlay pause-overlay" role="dialog" aria-modal="true" aria-labelledby="pause-title" hidden>
+    <div class="overlay-panel pause-panel-card">
+      <svg class="pause-panel-icon" aria-hidden="true"><use href="#icon-pause"></use></svg>
+      <h2 id="pause-title" class="panel-title">Istirahat sebentar.</h2>
+      <p class="panel-description">Tarik napas. Dapur menunggumu.</p>
+      <button id="resume-button" class="button primary-button" type="button" data-action="resume">Lanjut Masak<svg aria-hidden="true"><use href="#icon-arrow"></use></svg></button>
+      <p class="panel-footnote"><kbd>Esc</kbd> untuk melanjutkan</p>
+    </div>
+  </section>
+
+  <div id="toast-area" class="toast-area" role="status" aria-live="polite" aria-atomic="false" aria-relevant="additions text"></div>
+
+  <template id="order-ticket-template">
+    <article class="order-ticket" data-order="" role="listitem">
+      <div class="ticket-topline"><span class="order-number"></span><span class="order-reward"></span></div>
+      <div class="ticket-dish"><svg class="dish-picture" aria-hidden="true"><use href="#dish-rice"></use></svg><h3 class="dish-name"></h3></div>
+      <div class="order-steps" aria-label="Langkah memasak"></div>
+      <div class="patience-track meter-track" role="progressbar" aria-label="Kesabaran pelanggan" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><span class="patience-fill meter-fill"></span></div>
+      <span class="patience-label">Menunggu</span>
+    </article>
+  </template>
+  <template id="ingredient-template">
+    <button class="ingredient-crate" data-ingredient="" type="button">
+      <svg class="ingredient-art" aria-hidden="true"><use href="#ingredient-rice"></use></svg>
+      <span class="ingredient-name"></span>
+      <kbd class="ingredient-key"></kbd>
+    </button>
+  </template>
+  <template id="step-chip-template"><span class="step-chip" data-step=""><span class="step-label"></span></span></template>
+  <template id="station-item-template"><span class="station-item"><svg class="station-item-art" aria-hidden="true"><use href="#ingredient-rice"></use></svg><span class="station-item-name"></span></span></template>
+  <template id="toast-template"><div class="toast" data-kind="reward"><svg aria-hidden="true"><use href="#icon-coin"></use></svg><span class="toast-message"></span></div></template>
+</body>
+</html>
